@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 // Premium SEO Setup for Chanul Dilmith
 export const metadata: Metadata = {
+  metadataBase: new URL("https://premium-portfolio-six.vercel.app"), // 👈 MEKA THAMAI MAGIC FIX EKA
   title: "Chanul Dilmith | Software Engineer & Creative Developer",
   description: "Software Engineering undergrad actively seeking internship opportunities. Specializing in Next.js, 3D interactions, and crafting premium digital experiences.",
   keywords: [
@@ -27,8 +28,9 @@ export const metadata: Metadata = {
     description: "Software Engineering undergrad building God-Tier digital experiences. Available for internships.",
     type: "website",
     locale: "en_US",
-    // url: "https://chanul.dev", // Update this when you get your domain
+    url: "https://premium-portfolio-six.vercel.app", 
     siteName: "Chanul Dilmith Portfolio",
+    // Next.js auto detects the image, but giving the URL base ensures it works on all platforms.
   },
   twitter: {
     card: "summary_large_image",
