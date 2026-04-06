@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Send, CheckCircle, Loader2 } from "lucide-react";
 import { useCursorStore } from "@/store/useCursorStore";
 import { sendEmail } from "@/actions/sendEmail";
+import confetti from "canvas-confetti"; // 👈 CONFETTI IMPORT EKA
 
 export default function Contact() {
   const containerRef = useRef<HTMLElement>(null);
@@ -23,6 +24,36 @@ export default function Contact() {
   const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 1]);
 
+  // 🎇 PREMIUM FIREWORKS CONFETTI FUNCTION EKA
+  const triggerConfetti = () => {
+    const duration = 2.5 * 1000;
+    const end = Date.now() + duration;
+
+    const frame = () => {
+      // Wam paththen widinawa
+      confetti({
+        particleCount: 4,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.8 },
+        colors: ["#c084fc", "#ffffff", "#a855f7"]
+      });
+      // Dakunu paththen widinawa
+      confetti({
+        particleCount: 4,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.8 },
+        colors: ["#c084fc", "#ffffff", "#a855f7"]
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    };
+    frame();
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsPending(true);
@@ -37,6 +68,7 @@ export default function Contact() {
       setError(result.error);
     } else {
       setIsSuccess(true);
+      triggerConfetti(); // 👈 CONFETTI EKA TRIGGER KARANAWA
       form.reset(); 
       setTimeout(() => setIsSuccess(false), 5000);
     }
@@ -47,7 +79,6 @@ export default function Contact() {
   return (
     <footer
       ref={containerRef}
-      // h-[100dvh] pawichi kala mobile eke exact screen size ekata fit wenna
       className="relative w-full h-[100dvh] md:h-[900px]"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0% 100%)" }}
       id="contact"
@@ -58,7 +89,6 @@ export default function Contact() {
 
         <motion.div
           style={{ y, scale, opacity }}
-          // Mobile walata overflow-y-auto damma, podi phone ekaka unath scroll karala balanna puluwan wenna
           className="w-full h-full max-w-7xl mx-auto px-4 flex flex-col justify-center relative z-10 pt-16 md:pt-20 overflow-y-auto"
         >
           
@@ -66,7 +96,6 @@ export default function Contact() {
             
             {/* Left Side: Text */}
             <div className="mt-4 md:mt-0">
-              {/* text-5xl eka mobile wala text-4xl kara space save karanna */}
               <h2 className="text-4xl md:text-7xl font-bold text-white tracking-tighter mb-4 md:mb-6">
                 Let&apos;s build <br />
                 <span className="text-purple-400">legendary.</span>
@@ -74,7 +103,6 @@ export default function Contact() {
               <p className="text-white/50 text-base md:text-xl max-w-md hidden md:block">
                 Ready to take your digital presence to the next level? Drop me a message and let&apos;s discuss your project. I usually respond within 24 hours.
               </p>
-              {/* Mobile walata description eka podi kara */}
               <p className="text-white/50 text-sm md:hidden max-w-md">
                 Ready to take your digital presence to the next level? Drop me a message!
               </p>
@@ -89,7 +117,7 @@ export default function Contact() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="absolute inset-0 z-20 bg-[#050505]/90 backdrop-blur-md flex flex-col items-center justify-center text-center p-8"
                 >
-                  <CheckCircle className="w-12 h-12 md:w-16 md:h-16 text-green-400 mb-4" />
+                  <CheckCircle className="w-12 h-12 md:w-16 h-16 text-purple-400 mb-4" />
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Message Sent!</h3>
                   <p className="text-white/60 text-sm md:text-base">Thank you for reaching out. I&apos;ll get back to you shortly.</p>
                 </motion.div>

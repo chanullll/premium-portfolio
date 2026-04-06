@@ -7,7 +7,8 @@ import Preloader from "@/components/Preloader";
 import FloatingNav from "@/components/FloatingNav";
 import NoiseOverlay from "@/components/NoiseOverlay"; 
 import CommandPalette from "@/components/CommandPalette"; 
-import { Analytics } from "@vercel/analytics/react"; // 👈 VERCEL TRACKER EKA
+import { Analytics } from "@vercel/analytics/react"; 
+import DynamicTabTitle from "@/components/DynamicTabTitle"; // 👈 ALUTH IMPORT EKA
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,8 +54,9 @@ export default function RootLayout({
         <NoiseOverlay />
         <FloatingNav />
         <CommandPalette /> 
+        <DynamicTabTitle /> {/* 👈 ALUTH TAB EFFECT EKA */}
         <SmoothScrolling>{children}</SmoothScrolling>
-        <Analytics /> {/* 👈 RECRUITER TRACKER EKA WADA */}
+        <Analytics />
       </body>
     </html>
   );
