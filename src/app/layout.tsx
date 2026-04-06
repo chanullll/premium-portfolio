@@ -9,24 +9,31 @@ import NoiseOverlay from "@/components/NoiseOverlay";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// Premium SEO Setup
+// Premium SEO Setup for Chanul Dilmith
 export const metadata: Metadata = {
-  title: "Chanul | Creative Developer",
-  description: "God-Tier Frontend Engineer specializing in Next.js, 3D interactions, and premium digital experiences.",
-  keywords: ["Chanul", "Frontend Developer", "Next.js Portfolio", "Creative Developer", "Sri Lanka"],
+  title: "Chanul Dilmith | Software Engineer & Creative Developer",
+  description: "Software Engineering undergrad actively seeking internship opportunities. Specializing in Next.js, 3D interactions, and crafting premium digital experiences.",
+  keywords: [
+    "Chanul Dilmith", 
+    "Ranasingha Chanul Dilmith", 
+    "Software Engineering Intern", 
+    "Frontend Developer", 
+    "Creative Developer", 
+    "Next.js Portfolio", 
+    "Sri Lanka"
+  ],
   openGraph: {
-    title: "Chanul | Creative Developer",
-    description: "Building digital realities with code.",
+    title: "Chanul Dilmith | Premium Software Engineer",
+    description: "Software Engineering undergrad building God-Tier digital experiences. Available for internships.",
     type: "website",
     locale: "en_US",
-    // Oyage Vercel link eka dapu dawasata meka update karanna puluwan
-    // url: "https://chanul.dev", 
-    siteName: "Chanul Portfolio",
+    // url: "https://chanul.dev", // Update this when you get your domain
+    siteName: "Chanul Dilmith Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chanul | Creative Developer",
-    description: "Building digital realities with code.",
+    title: "Chanul Dilmith | Software Engineer",
+    description: "Building digital realities with code. Available for internships.",
   },
 };
 
@@ -37,7 +44,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* md:cursor-none witarai, phone wala default cursor eka pennanawa */}
       <body className={`${inter.className} antialiased md:cursor-none bg-[#050505]`}>
         <Preloader />
         <CustomCursor /> 
