@@ -8,7 +8,8 @@ import FloatingNav from "@/components/FloatingNav";
 import NoiseOverlay from "@/components/NoiseOverlay"; 
 import CommandPalette from "@/components/CommandPalette"; 
 import { Analytics } from "@vercel/analytics/react"; 
-import DynamicTabTitle from "@/components/DynamicTabTitle"; // 👈 ALUTH IMPORT EKA
+import DynamicTabTitle from "@/components/DynamicTabTitle";
+import ConsoleMessage from "@/components/ConsoleMessage"; // 👈 TECH LEAD EASTER EGG EKA
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,7 +55,8 @@ export default function RootLayout({
         <NoiseOverlay />
         <FloatingNav />
         <CommandPalette /> 
-        <DynamicTabTitle /> {/* 👈 ALUTH TAB EFFECT EKA */}
+        <DynamicTabTitle />
+        <ConsoleMessage /> {/* 👈 ALUTH COMPONENT EKA */}
         <SmoothScrolling>{children}</SmoothScrolling>
         <Analytics />
       </body>
