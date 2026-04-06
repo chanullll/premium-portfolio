@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Home, User, Briefcase, Mail } from "lucide-react";
-import Link from "next/link";
 import { useCursorStore } from "@/store/useCursorStore";
 
 const navItems = [
@@ -28,11 +27,22 @@ export default function FloatingNav() {
     }
   });
 
+  // Next.js Link wenuwata, custom smooth scroll function ekak
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, link: string) => {
+    e.preventDefault(); // Default jump wena eka nawaththanawa
+    const targetId = link.replace("#", ""); 
+    const elem = document.getElementById(targetId);
+    
+    if (elem) {
+      elem.scrollIntoView({ behavior: "smooth" }); // Smooth wela section ekata yanawa
+    }
+  };
+
   return (
     <motion.div
       variants={{
         visible: { y: 0, opacity: 1 },
-        hidden: { y: 100, opacity: 0 }, // 100px pallahata yanawa hide weddi
+        hidden: { y: 100, opacity: 0 }, 
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
@@ -40,22 +50,27 @@ export default function FloatingNav() {
     >
       <div className="flex items-center gap-2 p-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl shadow-black/50">
         {navItems.map((item, index) => (
-          <Link href={item.link} key={index}>
+          <a 
+            href={item.link} 
+            key={index}
+            onClick={(e) => handleScroll(e, item.link)} // Apige aluth function eka call karanawa
+            className="group"
+          >
             <motion.div
-              onMouseEnter={() => setCursor("", "button")} // Cursor eka maru karanawa
+              onMouseEnter={() => setCursor("", "button")} 
               onMouseLeave={resetCursor}
               whileHover={{ scale: 1.1, backgroundColor: "rgba(192, 132, 252, 0.2)" }}
               whileTap={{ scale: 0.95 }}
-              className="relative p-4 rounded-full flex items-center justify-center text-white/70 hover:text-purple-400 transition-colors duration-200 group"
+              className="relative p-4 rounded-full flex items-center justify-center text-white/70 hover:text-purple-400 transition-colors duration-200"
             >
               <item.icon className="w-5 h-5" />
               
-              {/* Tooltip on Hover (Optional Premium Detail) */}
+              {/* Tooltip on Hover */}
               <span className="absolute -top-10 scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-200 bg-black border border-white/10 text-white text-xs px-3 py-1.5 rounded-md tracking-wider">
                 {item.name}
               </span>
             </motion.div>
-          </Link>
+          </a>
         ))}
       </div>
     </motion.div>

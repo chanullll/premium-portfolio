@@ -59,7 +59,7 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
 
 export default function About() {
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 py-24 md:py-40">
+    <section id="about" className="w-full max-w-7xl mx-auto px-4 py-24 md:py-40">
       
       {/* Section Heading eka */}
       <motion.div 

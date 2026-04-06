@@ -1,41 +1,46 @@
 export const projectsData = [
   {
-    id: "1", // Meka string ekak kare URL ekata danna lesi wenna
+    id: "care-circle",
+    title: "Care Circle",
+    brief: "AI-powered healthcare & family caregiver management platform.",
+    description: "A comprehensive web application designed to bridge the gap in family healthcare. Care Circle features a Dashboard with an AI Health Score, real-time SOS alerts, and a complex Medicine Management system with an AI Interaction Checker for over 65+ medicines. It completely streamlines caregiver shift management using automated scheduling and allows families to track patient vitals seamlessly.",
+    image: "/care-circle-mockup.png", // <- 🚨 Meka gana pallaha kiyala thiyenawa
+    color: "from-blue-900/30 to-black", // Healthcare theme blue
+    tech: ["React.js", "Firebase", "Tailwind CSS", "Framer Motion"],
+    features: [
+      "AI Health Score & SOS pulse alerts",
+      "AI Interaction Checker for dangerous drug combinations",
+      "Automated caregiver shift management",
+      "Real-time vitals tracking (BP, Sugar, Heart Rate)",
+      "Role-based Family Circle via 6-digit Invite Codes"
+    ],
+    liveLink: "https://care-circle-link.vercel.app", // <- Oyage live link eka mekata danna
+    githubLink: "https://github.com/your-username/care-circle", // <- Github link eka
+  },
+  // Project 2 (Danata Placeholder)
+  {
+    id: "project-two",
     title: "E-Commerce OS",
-    brief: "A complete operating system for modern e-commerce brands.",
-    description: "This project revolutionizes how digital storefronts operate. Built from the ground up to handle massive concurrent traffic, it features a custom CMS, real-time inventory syncing, and ultra-fast checkout flows. The animations are butter-smooth, ensuring the highest conversion rates possible.",
-    tech: ["Next.js", "Tailwind", "Stripe", "Prisma"],
-    color: "from-purple-500/20 to-black",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop", 
-    link: "https://example.com",
-    github: "https://github.com",
-    year: "2024",
-    role: "Lead Frontend Engineer"
+    brief: "Next-gen headless e-commerce storefront.",
+    description: "A blazing fast e-commerce platform built with modern web standards.",
+    image: "/project-2.jpg", 
+    color: "from-purple-900/30 to-black",
+    tech: ["Next.js", "TypeScript", "Stripe", "Zustand"],
+    features: ["Cart management", "Payment gateway", "Admin dashboard"],
+    liveLink: "#",
+    githubLink: "#",
   },
+  // Project 3 (Danata Placeholder)
   {
-    id: "2",
-    title: "AI Image Gen",
-    brief: "Generative AI platform for creating stunning visual art.",
-    description: "A premium platform where users can generate, edit, and upscale images using Stable Diffusion models. I engineered the frontend to be extremely responsive, handling complex image manipulations entirely in the browser using WebGL and advanced state management.",
-    tech: ["React", "Python", "OpenAI API", "WebGL"],
-    color: "from-blue-500/20 to-black",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-    link: "https://example.com",
-    github: "https://github.com",
-    year: "2023",
-    role: "Fullstack Developer"
-  },
-  {
-    id: "3",
-    title: "Crypto Dashboard",
-    brief: "Real-time cryptocurrency tracking with beautiful charts.",
-    description: "An intricate financial dashboard providing real-time data for over 10,000 cryptocurrencies. The UI is heavily inspired by Bloomberg terminals but modernized with Framer Motion physics, glowing neon accents, and zero-latency WebSocket connections.",
-    tech: ["TypeScript", "Framer Motion", "Chart.js", "WebSockets"],
-    color: "from-emerald-500/20 to-black",
-    image: "https://images.unsplash.com/photo-1641332591144-cb16cb810f27?q=80&w=1200&auto=format&fit=crop",
-    link: "https://example.com",
-    github: "https://github.com",
-    year: "2023",
-    role: "UI/UX Engineer"
-  },
+    id: "project-three",
+    title: "3D Portfolio",
+    brief: "Immersive WebGL developer portfolio.",
+    description: "My personal digital space built to showcase my God-Tier engineering skills.",
+    image: "/project-3.jpg",
+    color: "from-emerald-900/30 to-black",
+    tech: ["Three.js", "GSAP", "React Fiber", "Tailwind"],
+    features: ["Custom 3D models", "Smooth scrolling", "Physics interactions"],
+    liveLink: "#",
+    githubLink: "#",
+  }
 ];
