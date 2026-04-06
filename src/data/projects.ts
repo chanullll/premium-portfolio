@@ -14,8 +14,8 @@ export const projectsData = [
       "Real-time vitals tracking (BP, Sugar, Heart Rate)",
       "Role-based Family Circle via 6-digit Invite Codes"
     ],
-    liveLink: "https://care-circle-link.vercel.app", // <- Oyage live link eka mekata danna
-    githubLink: "https://github.com/your-username/care-circle", // <- Github link eka
+    liveLink: "https://carecircle-client.vercel.app/", // <- Oyage live link eka mekata danna
+    githubLink: "https://github.com/chanullll/premium-portfolio.git", // <- Github link eka
   },
   // Project 2 (Danata Placeholder)
   {
