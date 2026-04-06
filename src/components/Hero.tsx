@@ -1,9 +1,9 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion"; // <- Variants kiyana eka aluthen gaththa
 
 export default function Hero() {
-  // Animation settings (Yatin udaata ena eka)
-  const fadeUpVariant = {
+  // TypeScript ekata meka animation variant ekak kiyala hariyatama kiyamu
+  const fadeUpVariant: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] } },
   };
@@ -31,7 +31,6 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           variants={fadeUpVariant}
-          // Podi delay ekak denawa, ethakota piliwelata udaata enne
           transition={{ delay: 0.2 }} 
         >
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-white mb-4">
