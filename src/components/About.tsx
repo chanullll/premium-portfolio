@@ -1,11 +1,15 @@
 "use client";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 import { Code2, Globe, Sparkles, Zap } from "lucide-react";
 
-// Reusable 3D Tilt Card Component eka
+// Reusable 3D Tilt & Spotlight Card Component eka
 function TiltCard({ children, containerClassName = "", cardClassName = "", delay = 0 }: any) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+
+  // Spotlight eke x, y coordinates
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
   const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
@@ -17,12 +21,19 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
+    
+    // Exact mouse position inside the card (For Spotlight)
+    const mouseXRel = e.clientX - rect.left;
+    const mouseYRel = e.clientY - rect.top;
+    
+    // Percentages (For 3D Tilt)
+    const xPct = mouseXRel / width - 0.5;
+    const yPct = mouseYRel / height - 0.5;
+    
     x.set(xPct);
     y.set(yPct);
+    mouseX.set(mouseXRel);
+    mouseY.set(mouseYRel);
   };
 
   const handleMouseLeave = () => {
@@ -47,9 +58,24 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className={`w-full h-full rounded-3xl group ${cardClassName}`}
+        className={`relative w-full h-full rounded-3xl group overflow-hidden ${cardClassName}`}
       >
-        <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }} className="w-full h-full">
+        {/* 🔦 THE SPOTLIGHT EFFECT */}
+        <motion.div
+          className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100 z-0"
+          style={{
+            background: useMotionTemplate`
+              radial-gradient(
+                400px circle at ${mouseX}px ${mouseY}px,
+                rgba(192, 132, 252, 0.15),
+                transparent 80%
+              )
+            `,
+          }}
+        />
+
+        {/* Athule thiyena content eka (z-axis eken udata ussanawa) */}
+        <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }} className="relative z-10 w-full h-full">
           {children}
         </div>
       </motion.div>
@@ -83,7 +109,7 @@ export default function About() {
         <TiltCard 
           delay={0.1}
           containerClassName="md:col-span-2"
-          cardClassName="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors duration-500 shadow-2xl shadow-black/50"
+          cardClassName="bg-[#0a0a0a] border border-white/10 p-8 shadow-2xl shadow-black/50"
         >
           <div className="flex flex-col justify-between h-full">
             <Sparkles className="text-purple-400 w-10 h-10 mb-8 opacity-50 group-hover:opacity-100 transition-opacity" />
@@ -99,7 +125,7 @@ export default function About() {
         {/* Box 2: Location/Timezone */}
         <TiltCard 
           delay={0.2}
-          cardClassName="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors duration-500 shadow-2xl shadow-black/50"
+          cardClassName="bg-[#0a0a0a] border border-white/10 p-8 shadow-2xl shadow-black/50"
         >
           <div className="flex flex-col items-center justify-center text-center h-full">
             <Globe className="text-white/20 w-16 h-16 mb-6 group-hover:text-purple-400 transition-colors duration-500 group-hover:animate-spin-slow" />
@@ -112,7 +138,7 @@ export default function About() {
         {/* Box 3: Tech Stack */}
         <TiltCard 
           delay={0.3}
-          cardClassName="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors duration-500 shadow-2xl shadow-black/50"
+          cardClassName="bg-[#0a0a0a] border border-white/10 p-8 shadow-2xl shadow-black/50"
         >
           <div className="flex flex-col h-full">
             <Code2 className="text-purple-400 w-8 h-8 mb-6" />
@@ -131,11 +157,9 @@ export default function About() {
         <TiltCard 
           delay={0.4}
           containerClassName="md:col-span-2"
-          cardClassName="bg-gradient-to-br from-purple-900/20 to-black border border-white/10 p-8 hover:border-purple-500/50 transition-colors duration-500 overflow-hidden relative shadow-2xl shadow-black/50"
+          cardClassName="bg-gradient-to-br from-[#0a0a0a] to-black border border-white/10 p-8 shadow-2xl shadow-black/50"
         >
           <div className="flex items-center justify-between h-full">
-            <div className="absolute -right-20 -top-20 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px]" />
-            
             <div className="relative z-10 w-full flex flex-col justify-center">
               <Zap className="text-purple-400 w-10 h-10 mb-4" />
               <h3 className="text-2xl font-semibold text-white mb-2">Engineered for Scale</h3>

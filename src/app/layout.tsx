@@ -9,7 +9,8 @@ import NoiseOverlay from "@/components/NoiseOverlay";
 import CommandPalette from "@/components/CommandPalette"; 
 import { Analytics } from "@vercel/analytics/react"; 
 import DynamicTabTitle from "@/components/DynamicTabTitle";
-import ConsoleMessage from "@/components/ConsoleMessage"; // 👈 TECH LEAD EASTER EGG EKA
+import ConsoleMessage from "@/components/ConsoleMessage"; 
+import TimezoneBadge from "@/components/TimezoneBadge"; // 👈 ALUTH TIMEZONE IMPORT EKA
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,10 +54,11 @@ export default function RootLayout({
         <Preloader />
         <CustomCursor /> 
         <NoiseOverlay />
+        <TimezoneBadge /> {/* 👈 ALUTH TIMEZONE BADGE EKA */}
         <FloatingNav />
         <CommandPalette /> 
         <DynamicTabTitle />
-        <ConsoleMessage /> {/* 👈 ALUTH COMPONENT EKA */}
+        <ConsoleMessage /> 
         <SmoothScrolling>{children}</SmoothScrolling>
         <Analytics />
       </body>
