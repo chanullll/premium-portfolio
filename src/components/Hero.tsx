@@ -96,14 +96,20 @@ export default function Hero() {
           transition={{ delay: 1 }}
           className="flex flex-wrap items-center justify-center gap-6 mt-12 pointer-events-auto"
         >
+                    {/* Palaweni Button eka: View Work */}
           <MagneticButton>
-            <button 
+            <a 
+              href="#work"
+              onClick={(e) => {
+                e.preventDefault(); // Nikan pannananne nathuwa
+                document.getElementById("work")?.scrollIntoView({ behavior: "smooth" }); // Smooth wela yanawa
+              }}
               onMouseEnter={() => setCursor("", "button")}
               onMouseLeave={resetCursor}
-              className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-purple-400 hover:text-white transition-colors duration-300"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-purple-400 hover:text-white transition-colors duration-300"
             >
               View Work
-            </button>
+            </a>
           </MagneticButton>
 
           <MagneticButton>

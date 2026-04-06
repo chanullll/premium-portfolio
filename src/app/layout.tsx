@@ -6,12 +6,13 @@ import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader"; 
 import FloatingNav from "@/components/FloatingNav";
 import NoiseOverlay from "@/components/NoiseOverlay"; 
+import CommandPalette from "@/components/CommandPalette"; // 👈 ALUTH IMPORT EKA
 
 const inter = Inter({ subsets: ["latin"] });
 
 // Premium SEO Setup for Chanul Dilmith
 export const metadata: Metadata = {
-  metadataBase: new URL("https://premium-portfolio-six.vercel.app"), // 👈 MEKA THAMAI MAGIC FIX EKA
+  metadataBase: new URL("https://premium-portfolio-six.vercel.app"),
   title: "Chanul Dilmith | Software Engineer & Creative Developer",
   description: "Software Engineering undergrad actively seeking internship opportunities. Specializing in Next.js, 3D interactions, and crafting premium digital experiences.",
   keywords: [
@@ -30,7 +31,6 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://premium-portfolio-six.vercel.app", 
     siteName: "Chanul Dilmith Portfolio",
-    // Next.js auto detects the image, but giving the URL base ensures it works on all platforms.
   },
   twitter: {
     card: "summary_large_image",
@@ -51,6 +51,7 @@ export default function RootLayout({
         <CustomCursor /> 
         <NoiseOverlay />
         <FloatingNav />
+        <CommandPalette /> {/* 👈 ALUTH COMMAND PALETTE EKA */}
         <SmoothScrolling>{children}</SmoothScrolling>
       </body>
     </html>
