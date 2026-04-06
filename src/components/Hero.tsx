@@ -1,9 +1,13 @@
 "use client";
 import { motion, Variants } from "framer-motion";
+import { Download } from "lucide-react"; // <- Icon eka gaththa
 import Background3D from "./Background3D";
-import MagneticButton from "./MagneticButton"; // <- Aluthen gaththa Magnetic eka
+import MagneticButton from "./MagneticButton"; 
+import { useCursorStore } from "@/store/useCursorStore"; // <- Cursor state eka gaththa
 
 export default function Hero() {
+  const { setCursor, resetCursor } = useCursorStore(); // Cursor functions
+
   const fadeUpVariant: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] } },
@@ -91,20 +95,32 @@ export default function Hero() {
           animate="visible"
           variants={fadeUpVariant}
           transition={{ delay: 1 }}
-          className="flex items-center justify-center gap-6 mt-12 pointer-events-auto"
+          className="flex flex-wrap items-center justify-center gap-6 mt-12 pointer-events-auto"
         >
-          {/* Palaweni Button eka */}
+          {/* Palaweni Button eka: View Work */}
           <MagneticButton>
-            <button className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-purple-400 hover:text-white transition-colors duration-300">
+            <button 
+              onMouseEnter={() => setCursor("", "button")}
+              onMouseLeave={resetCursor}
+              className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-purple-400 hover:text-white transition-colors duration-300"
+            >
               View Work
             </button>
           </MagneticButton>
 
-          {/* Dewani Button eka */}
+          {/* Dewani Button eka: Download CV */}
           <MagneticButton>
-            <button className="px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm transition-colors duration-300">
-              Contact Me
-            </button>
+            {/* HTML a tag ekak pawichi karanawa download attribute eka ekka */}
+            <a 
+              href="/chanul-resume.pdf" 
+              download="Chanul_Resume.pdf"
+              onMouseEnter={() => setCursor("", "button")}
+              onMouseLeave={resetCursor}
+              className="group flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
+            >
+              <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
+              Download CV
+            </a>
           </MagneticButton>
 
         </motion.div>
