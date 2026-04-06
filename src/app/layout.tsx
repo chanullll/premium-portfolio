@@ -6,7 +6,8 @@ import CustomCursor from "@/components/CustomCursor";
 import Preloader from "@/components/Preloader"; 
 import FloatingNav from "@/components/FloatingNav";
 import NoiseOverlay from "@/components/NoiseOverlay"; 
-import CommandPalette from "@/components/CommandPalette"; // 👈 ALUTH IMPORT EKA
+import CommandPalette from "@/components/CommandPalette"; 
+import { Analytics } from "@vercel/analytics/react"; // 👈 VERCEL TRACKER EKA
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,8 +52,9 @@ export default function RootLayout({
         <CustomCursor /> 
         <NoiseOverlay />
         <FloatingNav />
-        <CommandPalette /> {/* 👈 ALUTH COMMAND PALETTE EKA */}
+        <CommandPalette /> 
         <SmoothScrolling>{children}</SmoothScrolling>
+        <Analytics /> {/* 👈 RECRUITER TRACKER EKA WADA */}
       </body>
     </html>
   );
