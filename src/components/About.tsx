@@ -1,6 +1,64 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Code2, Globe, Sparkles, Zap } from "lucide-react";
+
+// Reusable 3D Tilt Card Component eka
+function TiltCard({ children, containerClassName = "", cardClassName = "", delay = 0 }: any) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth wela tilt wenna Spring Physics
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+
+  // Mouse eke position eka anuwa rotation (haarena) angle eka
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.5 }}
+      style={{ perspective: 1000 }} // 3D penna nam perspective eka aniwa one
+      className={containerClassName}
+    >
+      <motion.div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+        }}
+        className={`w-full h-full rounded-3xl group ${cardClassName}`}
+      >
+        {/* Athule thiyena content eka z-axis eken udata ussanawa */}
+        <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }} className="w-full h-full">
+          {children}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function About() {
   return (
@@ -25,73 +83,70 @@ export default function About() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         {/* Box 1: About Me (Loku Box eka) */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="md:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-colors duration-500 flex flex-col justify-between group"
+        <TiltCard 
+          delay={0.1}
+          containerClassName="md:col-span-2"
+          cardClassName="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors duration-500 shadow-2xl shadow-black/50"
         >
-          <Sparkles className="text-purple-400 w-10 h-10 mb-8 opacity-50 group-hover:opacity-100 transition-opacity" />
-          <div>
-            <h3 className="text-2xl font-semibold text-white mb-4">Who am I?</h3>
-            <p className="text-white/60 text-lg leading-relaxed">
-              I am a passionate creative developer from Sri Lanka. I don't just write code; I build interactive digital realities. My focus is always on performance, animations, and providing a butter-smooth user experience.
-            </p>
+          <div className="flex flex-col justify-between h-full">
+            <Sparkles className="text-purple-400 w-10 h-10 mb-8 opacity-50 group-hover:opacity-100 transition-opacity" />
+            <div>
+              <h3 className="text-2xl font-semibold text-white mb-4">Who am I?</h3>
+              <p className="text-white/60 text-lg leading-relaxed">
+                I am a passionate creative developer from Sri Lanka. I don't just write code; I build interactive digital realities. My focus is always on performance, animations, and providing a butter-smooth user experience.
+              </p>
+            </div>
           </div>
-        </motion.div>
+        </TiltCard>
 
         {/* Box 2: Location/Timezone */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-colors duration-500 flex flex-col items-center justify-center text-center group"
+        <TiltCard 
+          delay={0.2}
+          cardClassName="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors duration-500 shadow-2xl shadow-black/50"
         >
-          <Globe className="text-white/20 w-16 h-16 mb-6 group-hover:text-purple-400 transition-colors duration-500 group-hover:animate-spin-slow" />
-          <h3 className="text-xl font-semibold text-white mb-2">Based in</h3>
-          <p className="text-purple-300 font-medium">Sri Lanka</p>
-          <p className="text-white/40 text-sm mt-2">Available for worldwide freelance opportunities.</p>
-        </motion.div>
+          <div className="flex flex-col items-center justify-center text-center h-full">
+            <Globe className="text-white/20 w-16 h-16 mb-6 group-hover:text-purple-400 transition-colors duration-500 group-hover:animate-spin-slow" />
+            <h3 className="text-xl font-semibold text-white mb-2">Based in</h3>
+            <p className="text-purple-300 font-medium">Sri Lanka</p>
+            <p className="text-white/40 text-sm mt-2">Available for worldwide freelance opportunities.</p>
+          </div>
+        </TiltCard>
 
         {/* Box 3: Tech Stack */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-colors duration-500"
+        <TiltCard 
+          delay={0.3}
+          cardClassName="bg-white/5 border border-white/10 p-8 hover:bg-white/10 transition-colors duration-500 shadow-2xl shadow-black/50"
         >
-          <Code2 className="text-purple-400 w-8 h-8 mb-6" />
-          <h3 className="text-xl font-semibold text-white mb-6">Tech Arsenal</h3>
-          <div className="flex flex-wrap gap-3">
-            {/* Skills Pills */}
-            {["Next.js", "React", "TypeScript", "Tailwind", "Framer Motion", "GSAP"].map((skill, index) => (
-              <span key={index} className="px-4 py-2 rounded-full border border-white/10 bg-black/50 text-white/70 text-sm hover:text-white hover:border-purple-400 transition-colors cursor-default">
-                {skill}
-              </span>
-            ))}
+          <div className="flex flex-col h-full">
+            <Code2 className="text-purple-400 w-8 h-8 mb-6" />
+            <h3 className="text-xl font-semibold text-white mb-6">Tech Arsenal</h3>
+            <div className="flex flex-wrap gap-3">
+              {["Next.js", "React", "TypeScript", "Tailwind", "Framer Motion", "GSAP"].map((skill, index) => (
+                <span key={index} className="px-4 py-2 rounded-full border border-white/10 bg-black/50 text-white/70 text-sm hover:text-white hover:border-purple-400 transition-colors cursor-default shadow-lg">
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
-        </motion.div>
+        </TiltCard>
 
         {/* Box 4: Fast & Optimized */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="md:col-span-2 bg-gradient-to-br from-purple-900/20 to-black border border-white/10 rounded-3xl p-8 hover:border-purple-500/50 transition-colors duration-500 flex items-center justify-between overflow-hidden relative"
+        <TiltCard 
+          delay={0.4}
+          containerClassName="md:col-span-2"
+          cardClassName="bg-gradient-to-br from-purple-900/20 to-black border border-white/10 p-8 hover:border-purple-500/50 transition-colors duration-500 overflow-hidden relative shadow-2xl shadow-black/50"
         >
-          {/* Background Glow */}
-          <div className="absolute -right-20 -top-20 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px]" />
-          
-          <div className="relative z-10">
-            <Zap className="text-purple-400 w-10 h-10 mb-4" />
-            <h3 className="text-2xl font-semibold text-white mb-2">Built for Speed</h3>
-            <p className="text-white/60">Every line of code is optimized for maximum performance and SEO.</p>
+          <div className="flex items-center justify-between h-full">
+            {/* Background Glow */}
+            <div className="absolute -right-20 -top-20 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px]" />
+            
+            <div className="relative z-10 w-full flex flex-col justify-center">
+              <Zap className="text-purple-400 w-10 h-10 mb-4" />
+              <h3 className="text-2xl font-semibold text-white mb-2">Built for Speed</h3>
+              <p className="text-white/60">Every line of code is optimized for maximum performance and SEO.</p>
+            </div>
           </div>
-        </motion.div>
+        </TiltCard>
 
       </div>
     </section>
