@@ -1,12 +1,12 @@
 "use client";
 import { motion, Variants } from "framer-motion";
-import { Download } from "lucide-react"; // <- Icon eka gaththa
+import { Download } from "lucide-react"; 
 import Background3D from "./Background3D";
 import MagneticButton from "./MagneticButton"; 
-import { useCursorStore } from "@/store/useCursorStore"; // <- Cursor state eka gaththa
+import { useCursorStore } from "@/store/useCursorStore"; 
 
 export default function Hero() {
-  const { setCursor, resetCursor } = useCursorStore(); // Cursor functions
+  const { setCursor, resetCursor } = useCursorStore(); 
 
   const fadeUpVariant: Variants = {
     hidden: { opacity: 0, y: 40 },
@@ -49,7 +49,7 @@ export default function Hero() {
           variants={fadeUpVariant}
         >
           <p className="text-purple-400 font-medium tracking-widest uppercase text-sm mb-6 drop-shadow-lg">
-            Chanul • Creative Developer
+            Chanul Dilmith • Software Engineer
           </p>
         </motion.div>
 
@@ -61,7 +61,7 @@ export default function Hero() {
         >
           <div className="overflow-hidden">
             <motion.span variants={wordVariant} className="inline-block pb-2">
-              Building
+              Engineering
             </motion.span>
           </div>
           
@@ -70,10 +70,10 @@ export default function Hero() {
               variants={wordVariant} 
               className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200 pb-4"
             >
-              Digital
+              Premium
             </motion.span>
             <motion.span variants={wordVariant} className="inline-block pb-4">
-              Reality.
+              Experiences.
             </motion.span>
           </div>
         </motion.h1>
@@ -85,11 +85,10 @@ export default function Hero() {
           transition={{ delay: 0.8 }}
         >
           <p className="max-w-xl mx-auto text-lg md:text-xl text-white/70 mt-6 drop-shadow-lg">
-            I craft premium web experiences with modern technologies, focusing on smooth animations and pixel-perfect design.
+            I'm a Software Engineering undergrad specializing in Next.js and immersive 3D interactions. I don't just write code; I craft God-Tier digital realities.
           </p>
         </motion.div>
 
-        {/* 🌟 Aluth Magnetic Buttons Tika */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -97,7 +96,6 @@ export default function Hero() {
           transition={{ delay: 1 }}
           className="flex flex-wrap items-center justify-center gap-6 mt-12 pointer-events-auto"
         >
-          {/* Palaweni Button eka: View Work */}
           <MagneticButton>
             <button 
               onMouseEnter={() => setCursor("", "button")}
@@ -108,12 +106,10 @@ export default function Hero() {
             </button>
           </MagneticButton>
 
-          {/* Dewani Button eka: Download CV */}
           <MagneticButton>
-            {/* HTML a tag ekak pawichi karanawa download attribute eka ekka */}
             <a 
               href="/chanul-resume.pdf" 
-              download="Chanul_Resume.pdf"
+              download="Chanul_Dilmith_Resume.pdf"
               onMouseEnter={() => setCursor("", "button")}
               onMouseLeave={resetCursor}
               className="group flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"

@@ -7,11 +7,9 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Smooth wela tilt wenna Spring Physics
   const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
   const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
 
-  // Mouse eke position eka anuwa rotation (haarena) angle eka
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
 
@@ -38,7 +36,7 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.5 }}
-      style={{ perspective: 1000 }} // 3D penna nam perspective eka aniwa one
+      style={{ perspective: 1000 }} 
       className={containerClassName}
     >
       <motion.div
@@ -51,7 +49,6 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
         }}
         className={`w-full h-full rounded-3xl group ${cardClassName}`}
       >
-        {/* Athule thiyena content eka z-axis eken udata ussanawa */}
         <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }} className="w-full h-full">
           {children}
         </div>
@@ -72,17 +69,17 @@ export default function About() {
         className="mb-16"
       >
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          Behind the <span className="text-purple-400">Code.</span>
+          More Than Just <span className="text-purple-400">Code.</span>
         </h2>
         <p className="text-white/50 text-lg max-w-2xl">
-          A quick glimpse into my universe, what tools I use, and what drives me to create premium digital experiences.
+          My obsession lies in the sweet spot between clean backend architecture and pixel-perfect frontend design.
         </p>
       </motion.div>
 
       {/* Bento Grid Layout eka */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        {/* Box 1: About Me (Loku Box eka) */}
+        {/* Box 1: About Me */}
         <TiltCard 
           delay={0.1}
           containerClassName="md:col-span-2"
@@ -93,7 +90,7 @@ export default function About() {
             <div>
               <h3 className="text-2xl font-semibold text-white mb-4">Who am I?</h3>
               <p className="text-white/60 text-lg leading-relaxed">
-                I am a passionate creative developer from Sri Lanka. I don't just write code; I build interactive digital realities. My focus is always on performance, animations, and providing a butter-smooth user experience.
+                As a Software Engineering undergraduate, I build applications that are not only blazingly fast but also visually unforgettable. Currently, I am actively seeking an internship opportunity to bring my God-Tier work ethic and creative problem-solving skills to a high-performing engineering team.
               </p>
             </div>
           </div>
@@ -108,7 +105,7 @@ export default function About() {
             <Globe className="text-white/20 w-16 h-16 mb-6 group-hover:text-purple-400 transition-colors duration-500 group-hover:animate-spin-slow" />
             <h3 className="text-xl font-semibold text-white mb-2">Based in</h3>
             <p className="text-purple-300 font-medium">Sri Lanka</p>
-            <p className="text-white/40 text-sm mt-2">Available for worldwide freelance opportunities.</p>
+            <p className="text-white/40 text-sm mt-2">Open to local & remote internship opportunities.</p>
           </div>
         </TiltCard>
 
@@ -121,7 +118,7 @@ export default function About() {
             <Code2 className="text-purple-400 w-8 h-8 mb-6" />
             <h3 className="text-xl font-semibold text-white mb-6">Tech Arsenal</h3>
             <div className="flex flex-wrap gap-3">
-              {["Next.js", "React", "TypeScript", "Tailwind", "Framer Motion", "GSAP"].map((skill, index) => (
+              {["Next.js", "TypeScript", "Tailwind", "Three.js", "Framer Motion", "GSAP", "Zustand"].map((skill, index) => (
                 <span key={index} className="px-4 py-2 rounded-full border border-white/10 bg-black/50 text-white/70 text-sm hover:text-white hover:border-purple-400 transition-colors cursor-default shadow-lg">
                   {skill}
                 </span>
@@ -137,13 +134,12 @@ export default function About() {
           cardClassName="bg-gradient-to-br from-purple-900/20 to-black border border-white/10 p-8 hover:border-purple-500/50 transition-colors duration-500 overflow-hidden relative shadow-2xl shadow-black/50"
         >
           <div className="flex items-center justify-between h-full">
-            {/* Background Glow */}
             <div className="absolute -right-20 -top-20 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px]" />
             
             <div className="relative z-10 w-full flex flex-col justify-center">
               <Zap className="text-purple-400 w-10 h-10 mb-4" />
-              <h3 className="text-2xl font-semibold text-white mb-2">Built for Speed</h3>
-              <p className="text-white/60">Every line of code is optimized for maximum performance and SEO.</p>
+              <h3 className="text-2xl font-semibold text-white mb-2">Engineered for Scale</h3>
+              <p className="text-white/60">Writing clean, scalable, and highly optimized code to solve real-world problems.</p>
             </div>
           </div>
         </TiltCard>
