@@ -2,29 +2,38 @@
 
 import { Resend } from "resend";
 
+// Resend API key එක
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendEmail(formData: FormData) {
-  const name = formData.get("name") as string;
+export const sendEmail = async (formData: FormData) => {
+  // "as string" දාලා TypeScript error එක නැති කරනවා
   const senderEmail = formData.get("senderEmail") as string;
   const message = formData.get("message") as string;
+  const name = formData.get("name") as string;
 
-  // Simple validation
-  if (!message || !senderEmail || !name) {
-    return { error: "All fields are required." };
+  // Validation
+  if (!senderEmail || !message || !name) {
+    return { error: "Invalid form data" };
   }
 
   try {
-    await resend.emails.send({
-      from: "Portfolio Contact Form <onboarding@resend.dev>", // Me email eken thama oyata mail eka enne
-      to: "chanuldilmith200@gmail.com", // ⚠️ METHANATA OYAGE ATHHTHA EMAIL EKA DANNA! 
-      subject: `New Message from ${name}`,
-      replyTo: senderEmail,
+    const data = await resend.emails.send({
+      // Resend free tier එක නිසා මේක වෙනස් කරන්න එපා
+      from: "Portfolio Contact Form <onboarding@resend.dev>", 
+      
+      // ඔයාගේ ඇත්ත ඊමේල් එක
+      to: "chanuldilmith200@gmail.com", 
+      
+      subject: `New Message from ${name} via Portfolio`,
+      reply_to: senderEmail,
       text: `Name: ${name}\nEmail: ${senderEmail}\n\nMessage:\n${message}`,
     });
 
-    return { success: true };
+    return { data };
   } catch (error: unknown) {
-    return { error: "Failed to send email. Please try again later." };
+    console.error("Resend Error:", error);
+    return {
+      error: "Something went wrong. Please try again.",
+    };
   }
-}
+};
