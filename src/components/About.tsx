@@ -2,12 +2,10 @@
 import { motion, useMotionValue, useSpring, useTransform, useMotionTemplate } from "framer-motion";
 import { Code2, Globe, Sparkles, Zap } from "lucide-react";
 
-// Reusable 3D Tilt & Spotlight Card Component eka
 function TiltCard({ children, containerClassName = "", cardClassName = "", delay = 0 }: any) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Spotlight eke x, y coordinates
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -22,11 +20,9 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
     const width = rect.width;
     const height = rect.height;
     
-    // Exact mouse position inside the card (For Spotlight)
     const mouseXRel = e.clientX - rect.left;
     const mouseYRel = e.clientY - rect.top;
     
-    // Percentages (For 3D Tilt)
     const xPct = mouseXRel / width - 0.5;
     const yPct = mouseYRel / height - 0.5;
     
@@ -60,7 +56,6 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
         }}
         className={`relative w-full h-full rounded-3xl group overflow-hidden ${cardClassName}`}
       >
-        {/* 🔦 THE SPOTLIGHT EFFECT */}
         <motion.div
           className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100 z-0"
           style={{
@@ -74,7 +69,6 @@ function TiltCard({ children, containerClassName = "", cardClassName = "", delay
           }}
         />
 
-        {/* Athule thiyena content eka (z-axis eken udata ussanawa) */}
         <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }} className="relative z-10 w-full h-full">
           {children}
         </div>
@@ -87,7 +81,6 @@ export default function About() {
   return (
     <section id="about" className="w-full max-w-7xl mx-auto px-4 py-24 md:py-40">
       
-      {/* Section Heading eka */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -102,10 +95,8 @@ export default function About() {
         </p>
       </motion.div>
 
-      {/* Bento Grid Layout eka */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        {/* Box 1: About Me */}
         <TiltCard 
           delay={0.1}
           containerClassName="md:col-span-2"
@@ -116,13 +107,12 @@ export default function About() {
             <div>
               <h3 className="text-2xl font-semibold text-white mb-4">Who am I?</h3>
               <p className="text-white/60 text-lg leading-relaxed">
-                As a Software Engineering undergraduate, I build applications that are not only blazingly fast but also visually unforgettable. Currently, I am actively seeking an internship opportunity to bring my God-Tier work ethic and creative problem-solving skills to a high-performing engineering team.
+                As a Full Stack Engineering undergraduate, I build applications that are not only blazingly fast but also functionally robust. Currently, I am actively seeking an internship opportunity to bring my God-Tier work ethic, full-stack knowledge, and creative problem-solving skills to a high-performing engineering team.
               </p>
             </div>
           </div>
         </TiltCard>
 
-        {/* Box 2: Location/Timezone */}
         <TiltCard 
           delay={0.2}
           cardClassName="bg-[#0a0a0a] border border-white/10 p-8 shadow-2xl shadow-black/50"
@@ -135,7 +125,6 @@ export default function About() {
           </div>
         </TiltCard>
 
-        {/* Box 3: Tech Stack */}
         <TiltCard 
           delay={0.3}
           cardClassName="bg-[#0a0a0a] border border-white/10 p-8 shadow-2xl shadow-black/50"
@@ -144,7 +133,8 @@ export default function About() {
             <Code2 className="text-purple-400 w-8 h-8 mb-6" />
             <h3 className="text-xl font-semibold text-white mb-6">Tech Arsenal</h3>
             <div className="flex flex-wrap gap-3">
-              {["Next.js", "TypeScript", "Tailwind", "Three.js", "Framer Motion", "GSAP", "Zustand"].map((skill, index) => (
+              {/* 👇 BACKEND TECH ADD KARA */}
+              {["Next.js", "Node.js", "Firebase", "PostgreSQL", "TypeScript", "Tailwind", "Three.js"].map((skill, index) => (
                 <span key={index} className="px-4 py-2 rounded-full border border-white/10 bg-black/50 text-white/70 text-sm hover:text-white hover:border-purple-400 transition-colors cursor-default shadow-lg">
                   {skill}
                 </span>
@@ -153,7 +143,6 @@ export default function About() {
           </div>
         </TiltCard>
 
-        {/* Box 4: Fast & Optimized */}
         <TiltCard 
           delay={0.4}
           containerClassName="md:col-span-2"
@@ -163,7 +152,7 @@ export default function About() {
             <div className="relative z-10 w-full flex flex-col justify-center">
               <Zap className="text-purple-400 w-10 h-10 mb-4" />
               <h3 className="text-2xl font-semibold text-white mb-2">Engineered for Scale</h3>
-              <p className="text-white/60">Writing clean, scalable, and highly optimized code to solve real-world problems.</p>
+              <p className="text-white/60">Writing clean, scalable, and highly optimized code on both the client and server to solve real-world problems.</p>
             </div>
           </div>
         </TiltCard>

@@ -10,27 +10,29 @@ import CommandPalette from "@/components/CommandPalette";
 import { Analytics } from "@vercel/analytics/react"; 
 import DynamicTabTitle from "@/components/DynamicTabTitle";
 import ConsoleMessage from "@/components/ConsoleMessage"; 
-import TimezoneBadge from "@/components/TimezoneBadge"; // 👈 ALUTH TIMEZONE IMPORT EKA
+import TimezoneBadge from "@/components/TimezoneBadge"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
-// Premium SEO Setup for Chanul Dilmith
+// Premium SEO Setup for Multiple Targeted Roles
 export const metadata: Metadata = {
   metadataBase: new URL("https://premium-portfolio-six.vercel.app"),
   title: "Chanul Dilmith | Software Engineer & Creative Developer",
-  description: "Software Engineering undergrad actively seeking internship opportunities. Specializing in Next.js, 3D interactions, and crafting premium digital experiences.",
+  description: "Software Engineering undergrad actively seeking internships. Specializing as a Full Stack Engineer, Frontend Developer, and Creative Web Developer.",
   keywords: [
     "Chanul Dilmith", 
     "Ranasingha Chanul Dilmith", 
-    "Software Engineering Intern", 
-    "Frontend Developer", 
+    "Software Engineer Intern", 
+    "Full Stack Engineer", 
+    "Frontend Developer",
+    "Web Development Intern",
     "Creative Developer", 
-    "Next.js Portfolio", 
+    "Next.js",
     "Sri Lanka"
   ],
   openGraph: {
-    title: "Chanul Dilmith | Premium Software Engineer",
-    description: "Software Engineering undergrad building God-Tier digital experiences. Available for internships.",
+    title: "Chanul Dilmith | Software Engineer",
+    description: "Building scalable backend systems and God-Tier frontend digital experiences. Available for Software Engineering & Web Development Internships.",
     type: "website",
     locale: "en_US",
     url: "https://premium-portfolio-six.vercel.app", 
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chanul Dilmith | Software Engineer",
+    title: "Chanul Dilmith | Full Stack & Frontend Engineer",
     description: "Building digital realities with code. Available for internships.",
   },
 };
@@ -54,7 +56,7 @@ export default function RootLayout({
         <Preloader />
         <CustomCursor /> 
         <NoiseOverlay />
-        <TimezoneBadge /> {/* 👈 ALUTH TIMEZONE BADGE EKA */}
+        <TimezoneBadge />
         <FloatingNav />
         <CommandPalette /> 
         <DynamicTabTitle />
