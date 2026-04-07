@@ -25,7 +25,7 @@ export const sendEmail = async (formData: FormData) => {
       to: "chanuldilmith200@gmail.com", 
       
       subject: `New Message from ${name} via Portfolio`,
-      reply_to: senderEmail,
+      replyTo: senderEmail,
       text: `Name: ${name}\nEmail: ${senderEmail}\n\nMessage:\n${message}`,
     });
 
